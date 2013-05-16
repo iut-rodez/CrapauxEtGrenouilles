@@ -1,12 +1,12 @@
 /**
- * Batracien.java                                      9 mai 2013
- * Ben
+ * Batracien.java                                                       09/05/13
  */
 package craEtGre.Plateau;
 
 /**
- * @author Bercy
- * Classe permettent de crï¿½er et de gï¿½rer un batratien.
+ * Représentation d'un personnage
+ * 
+ * @author INFO1
  */
 public class Batracien {
 
@@ -18,12 +18,23 @@ public class Batracien {
     /**
      * Couloir du batratien (il ne peut pas en changer)
      */
-    public int couloir;
+    private int couloir;
     
     /**
-     * nï¿½nuphar sur lequel se trouve le batracien
+     * Nénuphar sur lequel se trouve le batracien
      */
-    public int nenuphar;
+    private int nenuphar;
+    
+    /**
+     * Crée un batracien d'un type donné 
+     * 
+     * @param type Type de batracien
+     */
+    public Batracien(CraGre type) {
+        
+        this.type = type;
+        
+    }
     
     /**
      * Methode permettent de dÃ©placer le batracien
