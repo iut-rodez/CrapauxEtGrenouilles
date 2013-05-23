@@ -72,14 +72,28 @@ public class InterfaceFichier {
     /**
      * Sauvegarde le nombre de victoire d'un joueur 
      * dans un fichier binaire 
-     * @param joueur joueur à sauvegarder
+     * @param nom Nom du joueur
+     * @param score Score du joueur
      */
-    public static void sauvegardeJoueur (Joueur joueur) {
+    public static void sauvegardeJoueur (String nom, int score)
+    	throws IOException {
         
+    	FileOutputStream sortie;
+    	DataOutputStream sortieDonnees;
+    	
+    	sortie = new FileOutputStream(CHEMINJOUEUR + nom + ".dat");
+    	sortieDonnees = new DataOutputStream(sortie);
+    	
+    	sortieDonnees.writeInt(score);
+    	
+    	sortieDonnees.close();
+    	sortie.close();
+    	
     }
     
     /**
      * Sauvegarde la position des crapaux et des grenouilles dans un fichier
+     * @param nom Nom du fichier
      * @param etang etang à sauvegarder
      * @throws IOException Erreur lors de l'écriture
      */
@@ -89,7 +103,7 @@ public class InterfaceFichier {
         FileOutputStream sortie;
         ObjectOutputStream sortieObjet;
             
-        sortie = new FileOutputStream(CHEMINPLATEAU + nom);
+        sortie = new FileOutputStream(CHEMINPLATEAU + nom + ".dat");
         sortieObjet = new ObjectOutputStream(sortie);
             
         sortieObjet.writeObject(etang);
@@ -104,11 +118,23 @@ public class InterfaceFichier {
      * @param nom
      * @return
      */
-    public static Joueur chargerJoueur (String nom) {
+    public static int chargerJoueur (String nom)
+    	throws IOException {
     
+    	int score;
     	
+    	FileInputStream entree;
+    	DataInputStream entreeDonnees;
     	
-        return null;
+    	entree = new FileInputStream(CHEMINJOUEUR + nom + ".dat");
+    	entreeDonnees = new DataInputStream(entree);
+    	
+    	score = entreeDonnees.readInt();
+    	
+    	entreeDonnees.close();
+    	entree.close();
+    	
+        return score;
     }
     
     /**
@@ -126,7 +152,7 @@ public class InterfaceFichier {
     	
     	Etang etang;
     	
-    	entree = new FileInputStream(CHEMINPLATEAU + nom);
+    	entree = new FileInputStream(CHEMINPLATEAU + nom + ".dat");
     	entreeObjet = new ObjectInputStream(entree);
     	
     	etang = (Etang) entreeObjet.readObject();
