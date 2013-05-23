@@ -81,8 +81,21 @@ public class InterfaceFichier {
     /**
      * Sauvegarde la position des crapaux et des grenouilles dans un fichier
      * @param etang etang à sauvegarder
+     * @throws IOException Erreur lors de l'écriture
      */
-    public static void sauvegardePlateau(Etang etang ) {
+    public static void sauvegardePlateau(String nom, Etang etang )
+    	throws IOException {
+    	
+        FileOutputStream sortie;
+        ObjectOutputStream sortieObjet;
+            
+        sortie = new FileOutputStream(CHEMINPLATEAU + nom);
+        sortieObjet = new ObjectOutputStream(sortie);
+            
+        sortieObjet.writeObject(etang);
+            
+        sortieObjet.close();
+        sortie.close();
         
     }
     
@@ -93,16 +106,35 @@ public class InterfaceFichier {
      */
     public static Joueur chargerJoueur (String nom) {
     
+    	
+    	
         return null;
     }
     
     /**
      * Charge un plateau
-     * @param nom
-     * @return
+     * @param nom Nom du plateau à charger
+     * @return Plateau chargé depuis le fichier
+     * @throws IOException Erreur lors de la lecture
+     * @throws ClassNotFoundException Objet invalide
      */
-    public static Etang chargerPlateau (String nom) {
+    public static Etang chargerPlateau (String nom)
+    	throws IOException, ClassNotFoundException {
       
-        return null;
+    	FileInputStream entree;
+    	ObjectInputStream entreeObjet;
+    	
+    	Etang etang;
+    	
+    	entree = new FileInputStream(CHEMINPLATEAU + nom);
+    	entreeObjet = new ObjectInputStream(entree);
+    	
+    	etang = (Etang) entreeObjet.readObject();
+    	
+    	entreeObjet.close();
+    	entree.close();
+    	
+        return etang;
+        
     }
 }
