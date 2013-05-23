@@ -178,10 +178,18 @@ public class Etang {
      */
     void setBatracien(int feuille, Batracien batracien) {
     	
+    	int couloir;
+    	int ancienneFeuille;
+    	
+    	couloir = batracien.getCouloir();
+    	ancienneFeuille = batracien.getNenuphar();
+    	
     	if (feuille >= 0 && feuille < largeur) {
     		
-	    	etang[batracien.getCouloir()][feuille] = batracien;
+	    	etang[couloir][feuille] = batracien;
 	    	batracien.setNenuphar(feuille);
+	    	
+	    	etang[couloir][ancienneFeuille] = null;
 	    	
     	}
     	

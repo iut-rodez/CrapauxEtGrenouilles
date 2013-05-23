@@ -54,7 +54,7 @@ public class Humain extends Joueur{
                                    +"batracien sur le plateau");
                 choix = -1;// valeur forcant une nouvelle saisie
             }
-        } while (choix >= 0);
+        } while (choix < 0);
         mesBatraciens[choix].deplacer();
     }
 
