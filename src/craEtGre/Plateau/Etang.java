@@ -3,7 +3,6 @@
  */
 package craEtGre.Plateau;
 
-import java.awt.List;
 import java.util.ArrayList;
 
 /**
@@ -103,6 +102,34 @@ public class Etang {
     		for (int j = 0; j < largeur; ++j) {
     			
     			if (etang[i][j] != null) {
+    				
+    				liste.add(etang[i][j]);
+    				
+    			}
+    			
+    		}
+    		
+    	}
+    	
+    	return (Batracien[]) liste.toArray();
+    	
+    }
+    
+    /**
+     * Retourne l'ensemble des batraciens d'un type donné
+     * 
+     * @param type Type de batracien
+     * @return Tableau de batraciens
+     */
+    public Batracien[] getBatraciens(CraGre type) {
+    	
+    	ArrayList<Batracien> liste = new ArrayList<Batracien>();
+    	
+    	for (int i = 0; i < hauteur; ++i) {
+    		
+    		for (int j = 0; j < largeur; ++j) {
+    			
+    			if (etang[i][j] != null && etang[i][j].getType() == type) {
     				
     				liste.add(etang[i][j]);
     				
