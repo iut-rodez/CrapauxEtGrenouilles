@@ -112,7 +112,7 @@ public class Etang {
     		
     	}
     	
-    	return liste.toArray();
+    	return (Batracien[]) liste.toArray();
     	
     }
     
