@@ -3,6 +3,9 @@
  */
 package craEtGre.Plateau;
 
+import java.awt.List;
+import java.util.ArrayList;
+
 /**
  * Représentation de la zone de jeu
  * 
@@ -83,6 +86,33 @@ public class Etang {
     	}
     	
     	return null;
+    	
+    }
+    
+    /**
+     * Retourne l'ensemble des batraciens
+     * 
+     * @return Tableau de batraciens
+     */
+    public Batracien[] getBatraciens() {
+    	
+    	ArrayList<Batracien> liste = new ArrayList<Batracien>();
+    	
+    	for (int i = 0; i < hauteur; ++i) {
+    		
+    		for (int j = 0; j < largeur; ++j) {
+    			
+    			if (etang[i][j] != null) {
+    				
+    				liste.add(etang[i][j]);
+    				
+    			}
+    			
+    		}
+    		
+    	}
+    	
+    	return liste.toArray();
     	
     }
     
