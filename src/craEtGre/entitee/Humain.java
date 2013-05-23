@@ -35,10 +35,9 @@ public class Humain extends Joueur{
      * @param type joue t'il les crapaux ou les grenouilles
      * @param nb nombre de batraciens sur le plateau
      */
-    public Humain(String nom ,CraGre type,int nb) {
+    public Humain(String nom ,CraGre type) {
         this.nom = nom;
         this.type = type;
-        this.mesBatraciens = new Batracien[nb];
     }
 
     public void tour() {

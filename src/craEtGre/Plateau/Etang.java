@@ -3,7 +3,6 @@
  */
 package craEtGre.Plateau;
 
-import java.util.ArrayList;
 
 /**
  * Représentation de la zone de jeu
@@ -15,12 +14,12 @@ public class Etang {
 	/**
 	 * Nombre maximum de couloirs
 	 */
-	private final int HAUTEUR_MAX = 10;
+	private static final int HAUTEUR_MAX = 10;
 	
 	/**
 	 * Nombre maximum de feuilles par couloir
 	 */
-	private final int LARGEUR_MAX = 20;
+	private static final int LARGEUR_MAX = 20;
 	
     /**
      * Tableau bidimensionnel représentant la position des batraciens
@@ -87,62 +86,90 @@ public class Etang {
     	return null;
     	
     }
-    
+
     /**
      * Retourne l'ensemble des batraciens
      * 
      * @return Tableau de batraciens
      */
     public Batracien[] getBatraciens() {
-    	
-    	ArrayList<Batracien> liste = new ArrayList<Batracien>();
-    	
-    	for (int i = 0; i < hauteur; ++i) {
-    		
-    		for (int j = 0; j < largeur; ++j) {
-    			
-    			if (etang[i][j] != null) {
-    				
-    				liste.add(etang[i][j]);
-    				
-    			}
-    			
-    		}
-    		
-    	}
-    	
-    	return (Batracien[]) liste.toArray();
-    	
+
+        int nb =0;
+        Batracien[] retour;
+        int indice = 0;
+
+        for (int i = 0; i < hauteur; ++i) {
+
+            for (int j = 0; j < largeur; ++j) {
+
+                if (etang[i][j] != null ) {
+
+                    nb++;
+
+                }
+
+            }
+        }
+            retour = new Batracien[nb];
+            for (int i = 0; i < hauteur; ++i) {
+
+                for (int j = 0; j < largeur; ++j) {
+
+                    if (etang[i][j] != null) {
+
+                        retour[indice] = etang[i][j];
+                        indice++;
+                        System.out.println("batracien trouvé");
+                    }
+
+                }
+
+            }
+        return  retour;
+
     }
-    
     /**
      * Retourne l'ensemble des batraciens d'un type donné
      * 
-     * @param type Type de batracien
+     * @param type type de batracien recherché
      * @return Tableau de batraciens
      */
     public Batracien[] getBatraciens(CraGre type) {
-    	
-    	ArrayList<Batracien> liste = new ArrayList<Batracien>();
-    	
-    	for (int i = 0; i < hauteur; ++i) {
-    		
-    		for (int j = 0; j < largeur; ++j) {
-    			
-    			if (etang[i][j] != null && etang[i][j].getType() == type) {
-    				
-    				liste.add(etang[i][j]);
-    				
-    			}
-    			
-    		}
-    		
-    	}
-    	
-    	return (Batracien[]) liste.toArray();
-    	
-    }
-    
+
+        int nb =0;
+        Batracien[] retour;
+        int indice = 0;
+
+        for (int i = 0; i < hauteur; ++i) {
+
+            for (int j = 0; j < largeur; ++j) {
+
+                if (etang[i][j] != null && etang[i][j].getType() == type ) {
+
+                    nb++;
+
+                }
+
+            }
+        }
+            retour = new Batracien[nb];
+            for (int i = 0; i < hauteur; ++i) {
+
+                for (int j = 0; j < largeur; ++j) {
+
+                    if (etang[i][j] != null && etang[i][j].getType() == type ) {
+
+                        retour[indice] = etang[i][j];
+                        indice++;
+                        System.out.println("batracien trouvé");
+                    }
+
+                }
+
+            }
+        return  retour;
+
+    }   
     /**
      * Positionne un batracien à une position donnée
      * 
@@ -167,29 +194,62 @@ public class Etang {
     public String toString() {
         String chaine = "";
         //parcours du tableau dans sa hauteur
-        for (int i = 0; i <= hauteur; i++) {
+        for (int i = 0; i < hauteur; i++) {
             //générer un trait horizontal de séparation 
-            for (int j = 0; j <= largeur; j++) {
+            for (int j = 0; j < largeur; j++) {
                 chaine = chaine + "----";
             }
             chaine = chaine + "-\n";
             //completer une ligne du tableau
-            for (int j = 0; j <= largeur; j++) {
+            for (int j = 0; j < largeur; j++) {
                 chaine = chaine + "|";
                 if (etang[i][j] == null) {
                     chaine = chaine + "   ";
                 } else {
                     chaine = chaine + etang[i][j].toString();
                 }
-                chaine = chaine + "|\n";
             }
-            //fermer le tableau avec un trait horizontal
-            for (int j = 0; j <= largeur; j++) {
-                chaine = chaine + "----";
-            }
-            chaine = chaine + "-\n";
+            chaine = chaine + "|\n";            
         }
+        //fermer le tableau avec un trait horizontal
+        for (int j = 0; j < largeur; j++) {
+            chaine = chaine + "----";
+        }
+        chaine = chaine + "-\n";
         return chaine;
     }
-
-}
+    
+    /**
+     * génère un étang de facon aléatoire
+     */
+    public static Etang etangHasard() {
+        return new Etang((int)(Math.random()*HAUTEUR_MAX),(int)(Math.random()*LARGEUR_MAX));
+    }
+    /**
+     * génère des batracien de facon aléatoire avec une densité donné
+     * @param densite
+     */
+    public void initBatracienHasard(int densite) {
+        for (int d = 0 ; d <= densite; d++) {
+            int x=(int)(Math.random()*hauteur);
+            int y=(int)(Math.random()*largeur);
+            if (etang[x][y]==null){//si la place est libre 
+            etang[x][y]=new Batracien(this,CraGre.GRENOUILLE,x);
+            etang[x][y].setNenuphar(y);
+            } else {
+                d--;//recommencer le tirage au sort de la position
+            }
+            
+        }
+        for (int d = 0 ; d <= densite; d++) {
+            int x=(int)(Math.random()*hauteur);
+            int y=(int)(Math.random()*largeur);
+            if (etang[x][y]==null){//si la place est libre 
+            etang[x][y]=new Batracien(this,CraGre.CRAPAUD,x);
+            etang[x][y].setNenuphar(y);
+            } else {
+                d--;//recommencer le tirage au sort de la position
+            }
+        }
+    }
+    }

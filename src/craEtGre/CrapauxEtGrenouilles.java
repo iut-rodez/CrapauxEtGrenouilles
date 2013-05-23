@@ -6,6 +6,12 @@ package craEtGre;
 
 import java.util.Scanner;
 
+import craEtGre.Plateau.CraGre;
+import craEtGre.Plateau.Etang;
+import craEtGre.entitee.Humain;
+import craEtGre.entitee.IA;
+import craEtGre.entitee.Joueur;
+
 /**
  * @author Bercy
  * Programme principal du jeu des Crapaux et des Grenouilles
@@ -93,14 +99,20 @@ public class CrapauxEtGrenouilles {
      */
     public static void partieSimple() {
         
+        //variables servant uniquement à la saisie
         char j1;//type de joueur 1
         char j2;//type de joueur 2
         String j1nom;//nom du joueur 1
         String j2nom;//nom du joueur 2
         int j1niveau;//niveau du joueur 1 si c'est une IA
         int j2niveau;//niveau du joueur 2 si c'est une IA
+        int densite =2 ;
+        
+        Joueur joueur1=null;//Joueurs
+        Joueur joueur2=null;
         
         Scanner entree = new Scanner(System.in);
+        
         do {
             System.out
                     .println("J1 est : \n      une(I)IA\n       un (H)Humain");
@@ -145,12 +157,18 @@ public class CrapauxEtGrenouilles {
                     		       "nombre entre 0 et 100");
                 }
             } while (j1niveau < 0 || j1niveau > 100);
+            
+            //création d'une IA
+            joueur1 = new IA(j1nom,CraGre.GRENOUILLE, j1niveau/100.0);
 
         } else {
             // si j1 est un humain
             System.out.println("entrez votre nom (utilise pour charger " +
                     		"vos statistiques) :");
             j1nom = entree.nextLine();
+            
+            //création d'un Humain
+            joueur1 = new Humain(j1nom,CraGre.GRENOUILLE);
         }
 
         if (j2 == 'i') {
@@ -171,18 +189,29 @@ public class CrapauxEtGrenouilles {
                             .println("Veuillez entrez un nombre entre 0 et 100");
                 }
             } while (j2niveau < 0 || j2niveau > 100);
-
+            
+            //création d'une IA
+            joueur2 = new IA(j2nom,CraGre.CRAPAUD, j2niveau/100.0);
+            
         } else {
             // si j2 est un humain
             System.out
                     .println("entrez votre nom (utilise pour charger vos statistiques) :");
             j2nom = entree.nextLine();
+            
+            //création d'un Humain
+            joueur2 = new Humain(j2nom,CraGre.GRENOUILLE);
         }
         
         
         //affichage du tableau des joueurs
         System.out.println(j1nom + " vs " + j2nom);
+
+        ControleurDeJeu controleurdejeu = new ControleurDeJeu(Etang.etangHasard(),joueur1,joueur2);
+        controleurdejeu.initialiser(densite);
+        controleurdejeu.partieSimple();
     }
+
 }
  
 
