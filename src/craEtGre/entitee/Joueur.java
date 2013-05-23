@@ -6,13 +6,14 @@ package craEtGre.entitee;
 
 import craEtGre.Plateau.Batracien;
 import craEtGre.Plateau.CraGre;
+import craEtGre.Plateau.Etang;
 
 /**
  * @author benjaminbercy
  * 
  */
 public abstract class Joueur {
-    
+
     /**
      * Identifiant du joueur (son nom affiché dans le jeu).
      */
@@ -36,7 +37,8 @@ public abstract class Joueur {
     public abstract void tour();
 
     /**
-     * Controle si le joueur peut jouer (si au moins un déplacement est possible)
+     * Controle si le joueur peut jouer (si au moins un déplacement est
+     * possible)
      * 
      * @return TRUE si c'est le cas
      */
@@ -60,5 +62,28 @@ public abstract class Joueur {
     public Batracien getMesBatraciens(int numero) {
         return mesBatraciens[numero];
     }
+    
+    /**
+     * Sert à initialiser les batracien en début de partie
+     */
+    public void initBatracien(Etang etang){
+        mesBatraciens = etang.getBatraciens(type);
+    }
+    /**
+     * sert à attribuer des numéros aux batraciens du joueur
+     */
+    public void numeroter() {
+        for (int i = 0; i < mesBatraciens.length; i++) {
+            mesBatraciens[i].setNumero(i);
+            System.out.println("numéro "+i+" trouvé");
+        }
+
+    }
+    public void testnumeroter() {
+        for(int i = 0 ; i < mesBatraciens.length ;i++) {
+            System.out.println(mesBatraciens[i].toString());
+        }
+    }
 }
+
     

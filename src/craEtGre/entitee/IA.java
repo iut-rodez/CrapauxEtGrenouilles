@@ -46,13 +46,12 @@ public class IA extends Joueur {
      *            niveau de l'ia de 0(sans stratégie) à 1(tout les coups sont
      *            réfléchis)
      */
-    public IA(String nom, CraGre type, int nb, double difficulte) {
+    public IA(String nom, CraGre type, double difficulte) {
         this();
         if (0 <= difficulte && difficulte <= 1) {
             this.difficulte = difficulte;
             this.nom = nom;
             this.type = type;
-            this.mesBatraciens = new Batracien[nb];
         } // else { constructeur par défaut
 
     }
@@ -77,16 +76,13 @@ public class IA extends Joueur {
         choix = 0;
         choix = (int) (Math.random() * mesBatraciens.length);
         mesBatraciens[choix].deplacer();
+        System.out.println(nom +": J'ai déplacé "+ choix);
     }
     
     /**
      * génère un coup suivant une stratégie d'abord offensive puis défensive
      */
     private void strategie() {
-        int choix;
-        choix = 0;
-        Batracien vision[];
-        
-        mesBatraciens[choix].deplacer();        
+        coupHasard();        
     }
 }

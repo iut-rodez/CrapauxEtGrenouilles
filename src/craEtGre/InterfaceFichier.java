@@ -72,97 +72,37 @@ public class InterfaceFichier {
     /**
      * Sauvegarde le nombre de victoire d'un joueur 
      * dans un fichier binaire 
-     * @param nom Nom du joueur
-     * @param score Score du joueur
-     * @throws IOException Erreur lors de l'écriture
+     * @param joueur joueur à sauvegarder
      */
-    public static void sauvegardeJoueur (String nom, int score)
-    	throws IOException {
+    public static void sauvegardeJoueur (Joueur joueur) {
         
-    	FileOutputStream sortie;
-    	DataOutputStream sortieDonnees;
-    	
-    	sortie = new FileOutputStream(CHEMINJOUEUR + nom + ".dat");
-    	sortieDonnees = new DataOutputStream(sortie);
-    	
-    	sortieDonnees.writeInt(score);
-    	
-    	sortieDonnees.close();
-    	sortie.close();
-    	
     }
     
     /**
      * Sauvegarde la position des crapaux et des grenouilles dans un fichier
-     * @param nom Nom du fichier
      * @param etang etang à sauvegarder
-     * @throws IOException Erreur lors de l'écriture
      */
-    public static void sauvegardePlateau(String nom, Etang etang )
-    	throws IOException {
-    	
-        FileOutputStream sortie;
-        ObjectOutputStream sortieObjet;
-            
-        sortie = new FileOutputStream(CHEMINPLATEAU + nom + ".dat");
-        sortieObjet = new ObjectOutputStream(sortie);
-            
-        sortieObjet.writeObject(etang);
-            
-        sortieObjet.close();
-        sortie.close();
+    public static void sauvegardePlateau(Etang etang ) {
         
     }
     
     /**
      * Charge le nombre de victoires d'un joueur
-     * @param nom Nom du joueur
-     * @return Score du joueur
-     * @throws IOException Erreur lors de la lecture
+     * @param nom
+     * @return
      */
-    public static int chargerJoueur (String nom)
-    	throws IOException {
+    public static Joueur chargerJoueur (String nom) {
     
-    	int score;
-    	
-    	FileInputStream entree;
-    	DataInputStream entreeDonnees;
-    	
-    	entree = new FileInputStream(CHEMINJOUEUR + nom + ".dat");
-    	entreeDonnees = new DataInputStream(entree);
-    	
-    	score = entreeDonnees.readInt();
-    	
-    	entreeDonnees.close();
-    	entree.close();
-    	
-        return score;
+        return null;
     }
     
     /**
      * Charge un plateau
-     * @param nom Nom du plateau à charger
-     * @return Plateau chargé depuis le fichier
-     * @throws IOException Erreur lors de la lecture
-     * @throws ClassNotFoundException Objet invalide
+     * @param nom
+     * @return
      */
-    public static Etang chargerPlateau (String nom)
-    	throws IOException, ClassNotFoundException {
+    public static Etang chargerPlateau (String nom) {
       
-    	FileInputStream entree;
-    	ObjectInputStream entreeObjet;
-    	
-    	Etang etang;
-    	
-    	entree = new FileInputStream(CHEMINPLATEAU + nom + ".dat");
-    	entreeObjet = new ObjectInputStream(entree);
-    	
-    	etang = (Etang) entreeObjet.readObject();
-    	
-    	entreeObjet.close();
-    	entree.close();
-    	
-        return etang;
-        
+        return null;
     }
 }

@@ -39,10 +39,11 @@ public class Batracien {
      * 
      * @param type Type de batracien
      */
-    public Batracien(Etang etang, CraGre type) {
+    public Batracien(Etang etang, CraGre type,int couloir) {
         
     	this.etang = etang;
         this.type = type;
+        this.couloir = couloir;
         
     }
     
