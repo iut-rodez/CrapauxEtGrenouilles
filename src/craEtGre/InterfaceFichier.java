@@ -74,6 +74,7 @@ public class InterfaceFichier {
      * dans un fichier binaire 
      * @param nom Nom du joueur
      * @param score Score du joueur
+     * @throws IOException Erreur lors de l'écriture
      */
     public static void sauvegardeJoueur (String nom, int score)
     	throws IOException {
@@ -115,8 +116,9 @@ public class InterfaceFichier {
     
     /**
      * Charge le nombre de victoires d'un joueur
-     * @param nom
-     * @return
+     * @param nom Nom du joueur
+     * @return Score du joueur
+     * @throws IOException Erreur lors de la lecture
      */
     public static int chargerJoueur (String nom)
     	throws IOException {
