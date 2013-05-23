@@ -11,6 +11,10 @@ package craEtGre.Plateau;
 public class Batracien {
 
     /**
+     * numero du batracien
+     */
+    private int numero;
+    /**
      * Type de bactracien
      */
     private CraGre type;
@@ -181,4 +185,38 @@ public class Batracien {
     	
     }
     
+    /**
+     * @return the numero
+     */
+    public int getNumero() {
+        return numero;
+    }
+
+    /**
+     * @param numero the numero to set
+     */
+    public void setNumero(int numero) {
+        this.numero = numero;
+    }
+
+    /** 
+     * renvoi la représentation du batratien 
+     * sous forme de 1ère lettre du type, Numéro
+     * exemple G02 C42
+     */
+    @Override
+    public String toString() {
+        String chaine;
+        if (this.getType()==CraGre.CRAPAUD) {
+           chaine = "C"; 
+        } else {
+            chaine = "G";
+        }
+        if (this.getNumero()<10) {
+            chaine = chaine + "0";
+        }
+        chaine = chaine +getNumero();
+        return chaine;
+    }
+
 }

@@ -102,5 +102,37 @@ public class Etang {
     	}
     	
     }
-    
+
+    /**
+     * Retourne une représentation de l'étang sous forme de chaine
+     */
+    @Override
+    public String toString() {
+        String chaine = "";
+        //parcours du tableau dans sa hauteur
+        for (int i = 0; i <= hauteur; i++) {
+            //générer un trait horizontal de séparation 
+            for (int j = 0; j <= largeur; j++) {
+                chaine = chaine + "----";
+            }
+            chaine = chaine + "-\n";
+            //completer une ligne du tableau
+            for (int j = 0; j <= largeur; j++) {
+                chaine = chaine + "|";
+                if (etang[i][j] == null) {
+                    chaine = chaine + "   ";
+                } else {
+                    chaine = chaine + etang[i][j].toString();
+                }
+                chaine = chaine + "|\n";
+            }
+            //fermer le tableau avec un trait horizontal
+            for (int j = 0; j <= largeur; j++) {
+                chaine = chaine + "----";
+            }
+            chaine = chaine + "-\n";
+        }
+        return chaine;
+    }
+
 }
